@@ -10,14 +10,23 @@ server.listen(app.get('port'));
 var mongooseURI = process.env.MONGOLAB_URI || 'mongodb://' + config.db.host + ':' + config.db.port + '/' + config.db.database
 mongoose.connect(mongooseURI);
 
-var cart = require('./Cart.js');
+require('./Cart.js');
+var Cart = mongoose.model('Cart');
 
 app.get('/scanItem', function(req,res){
-    var item = req.query.item;
-    var index = cart.items.indexOf(item);
-    if(index != -1)
-        cart.items.splice(index,1);
-    else {
-        cart.items.push(item)
-    }
+    
+    Cart.findOne({}, function(err,cart){
+        if(!cart)
+            cart = new Cart({items:[]});
+
+        var item = req.query.item;
+        var index = cart.items.indexOf(item);
+        if(index != -1)
+            cart.items.splice(index,1);
+        else {
+            cart.items.push(item)
+        }
+        cart.save();
+        res.end();
+    });
 });
