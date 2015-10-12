@@ -1,0 +1,29 @@
+{
+  "name": "ua_nfc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.1.10",
+    "mongodb": "^2.0.45"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gberkowitzLMI/UA_NFC.git"
+  },
+  "author": "Gavin Berkowitz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gberkowitzLMI/UA_NFC/issues"
+  },
+    "engines": {
+    "node": "0.12.2",
+    "npm": "2.7.5"
+  },
+  "homepage": "https://github.com/gberkowitzLMI/UA_NFC#readme"
+}
