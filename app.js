@@ -30,3 +30,16 @@ app.get('/scanItem', function(req,res){
         res.end();
     });
 });
+
+app.get('/cart', function(req,res){
+    Cart.findOne({}, function(err,cart){
+        if(!cart)
+            cart = new Cart({items:[]});
+        res.json({"cart":cart.items});
+        res.end();
+    });
+});
+
+app.get('/', function(req,res){
+    res.sendFile(__dirname +'/index.html');
+});

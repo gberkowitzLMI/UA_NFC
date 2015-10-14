@@ -1,0 +1,22 @@
+<!doctype html>
+<html ng-app="UA">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script type="text/javascript">
+      angular.module("UA",[]).controller('Main', function($scope, $http){
+        $http.get('/cart')
+          .success(function(data){
+            $scope.cart = data.cart;
+          });
+        });
+    </script>
+  </head>
+  <body ng-controller="Main">
+    <div>
+      <h1>View your cart</h1>
+      <div ng-repeat="item in cart">
+        <h2>{{item}}</h2>
+        <div>
+    </div>
+  </body>
+</html>
