@@ -3,12 +3,15 @@ var app = express();
 var server = require('http').Server(app);
 var mongoose = require('mongoose');
 var config = require('./config.js');
+var io = require('socket.io')(server);
 
 app.set('port', (process.env.PORT || 5000));
 server.listen(app.get('port'));
 
 var mongooseURI = process.env.MONGOLAB_URI || 'mongodb://' + config.db.host + ':' + config.db.port + '/' + config.db.database
 mongoose.connect(mongooseURI);
+
+app.use('/images',express.static('images'));
 
 require('./Cart.js');
 var Cart = mongoose.model('Cart');
@@ -21,10 +24,13 @@ app.get('/scanItem', function(req,res){
 
         var item = req.query.item;
         var index = cart.items.indexOf(item);
-        if(index != -1)
+        if(index != -1){
             cart.items.splice(index,1);
+            io.emit('itemRemoved', item);
+        }
         else {
-            cart.items.push(item)
+            cart.items.push(item);
+            io.emit('itemAdded', item);
         }
         cart.save();
         res.end();

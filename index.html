@@ -2,8 +2,27 @@
 <html ng-app="UA">
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
       angular.module("UA",[]).controller('Main', function($scope, $http){
+        var socket = io(window.location.host);
+
+        socket.on('itemRemoved', function(item){
+          $scope.cart.splice($scope.cart.indexOf(item),1);
+          $scope.$apply();
+        });
+        socket.on('itemAdded', function(item){
+          $scope.cart.push(item);
+          $scope.$apply();
+        })
+        $scope.imageMapping = {
+          'Sweatshirt': '/images/sweatshirt.jpg',
+          'G Stealth Sneakers': '/images/micro-g-stealth.jpg',
+          'Speedform Apollo Sneakers': '/images/speedform-apollo.jpg',
+          'Speedform XL': '/images/speedform-xl.jpg',
+          'shoe2':'/images/speedform-xl.jpg'
+        };
+        $scope.testImageURL = '/images/speedform-xl.jpg';
         $http.get('/cart')
           .success(function(data){
             $scope.cart = data.cart;
@@ -16,6 +35,7 @@
       <h1>View your cart</h1>
       <div ng-repeat="item in cart">
         <h2>{{item}}</h2>
+        <img ng-src="{{imageMapping[item]}}" height='300px' width='300px'></img>
         <div>
     </div>
   </body>
