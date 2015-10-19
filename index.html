@@ -20,7 +20,8 @@
           'G Stealth Sneakers': '/images/micro-g-stealth.jpg',
           'Speedform Apollo Sneakers': '/images/speedform-apollo.jpg',
           'Speedform XL': '/images/speedform-xl.jpg',
-          'shoe2':'/images/speedform-xl.jpg'
+          'B Infant Spine Evo': '/images/bspineevo.jpg',
+          'G Infant Spine Evo': '/images/gspineevo.jpg'
         };
         $scope.testImageURL = '/images/speedform-xl.jpg';
         $http.get('/cart')
@@ -35,7 +36,7 @@
       <h1>View your cart</h1>
       <div ng-repeat="item in cart">
         <h2>{{item}}</h2>
-        <img ng-src="{{imageMapping[item]}}" height='300px' width='300px'></img>
+        <img ng-src="{{imageMapping[item]}}" height='300px' width='500px'></img>
         <div>
     </div>
   </body>
