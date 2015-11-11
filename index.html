@@ -32,12 +32,11 @@
     </script>
   </head>
   <body ng-controller="Main">
-    <div>
-      <h1>View your cart</h1>
-      <div ng-repeat="item in cart">
+    <span>
+      <span ng-repeat="item in cart">
         <h2>{{item}}</h2>
         <img ng-src="{{imageMapping[item]}}" height='300px' width='500px'></img>
-        <div>
-    </div>
+      <span>
+    </span>
   </body>
 </html>
